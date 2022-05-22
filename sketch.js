@@ -24,8 +24,8 @@ function mouseDragged() {
     gridNow[floor(mouseX / res)][floor(mouseY / res)] = 1;
 }
 
-const width = 800;
-const height = 800;
+const width = 400;
+const height = 400;
 const res = 10;
 const cols = width / res;
 const rows = height / res;

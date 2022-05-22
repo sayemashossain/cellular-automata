@@ -14,13 +14,13 @@ class Vehicle {
     }
 
     behaviours() {
-        let arrive = this.arrive(this.target);
+        let arrive = this.arrive(this.target, 100);
 
         let mouse = createVector(mouseX, mouseY);
-        let flee = this.flee(mouse);
+        let flee = this.flee(mouse, 50);
 
         arrive.mult(1);
-        flee.mult(5)
+        flee.mult(1)
 
         this.applyForce(arrive);
         this.applyForce(flee);
@@ -60,10 +60,10 @@ class Vehicle {
         return steer;
     }
 
-    flee(target) {
+    flee(target, distance) {
         let desired = p5.Vector.sub(target, this.pos);
         let d = desired.mag();
-        if (d < 80) {
+        if (d < distance) {
             desired.setMag(this.maxspeed);
             desired.mult(-1)
             let steer = p5.Vector.sub(desired, this.vel);
@@ -75,11 +75,11 @@ class Vehicle {
         }
     }
 
-    arrive(target) {
+    arrive(target, distance) {
         let desired = p5.Vector.sub(target, this.pos);
         let d = desired.mag();
         let speed = this.maxspeed;
-        if (d < 100) {
+        if (d < distance) {
             speed = map(d, 0, 100, 0, this.maxspeed)
         }
         desired.setMag(speed);
